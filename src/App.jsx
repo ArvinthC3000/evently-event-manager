@@ -3,6 +3,8 @@ import 'materialize-css/dist/css/materialize.min.css';
 
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import store from './store';
 
 const App = () => {
   useEffect(() => {
@@ -10,7 +12,11 @@ const App = () => {
     M.AutoInit();
   });
 
-  return <div className='App'>Hi</div>;
+  return (
+    <Provider store={store}>
+      <div className='App'>Hi</div>
+    </Provider>
+  );
 };
 
 export default App;
