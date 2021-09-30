@@ -16,7 +16,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <div>Hello World</div>
+      {/* <div>Hello World</div> */}
       <Router>
         <Switch>
           <Route path='/register' component={Register} />
