@@ -11,7 +11,7 @@
 .form-container {
   background-color: #ffffff;
   margin: 0 7rem;
-  height: 90%;
+  max-height: 90%;
   padding: 2rem;
   border: 1px solid #70707077;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -42,6 +42,7 @@
 h2,
 h3 {
   text-align: center;
+  margin: 0;
 }
 
 Link {
