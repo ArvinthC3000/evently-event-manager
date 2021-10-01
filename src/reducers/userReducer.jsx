@@ -1,4 +1,4 @@
-import { ADD_USER } from '../actions/types';
+import { ADD_USER, SET_LOADING } from '../actions/types';
 
 const initialState = {
   user: null,
@@ -14,6 +14,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
+        // loading: false,
+      };
+    case SET_LOADING:
+      console.log('loading');
+      return {
+        ...state,
+        loading: true,
       };
 
     default:
