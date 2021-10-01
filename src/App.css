@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap');
+/* @import '../node_modules/@syncfusion/ej2-react-calendars/styles/material.css'; */
+@import url('https://cdn.syncfusion.com/ej2/material.css');
+
 :root {
   --color-main: #71c6dd;
   --color-main-light: #e1f6fb;
@@ -60,4 +63,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* EVENT MODAL */
+
+.event-modal {
+  padding: 2rem !important;
+}
+
+.event-modal h3 {
+  text-align: start;
 }

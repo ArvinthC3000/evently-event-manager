@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import AddEventModal from './modals/AddEventModal';
 
 const App = () => {
   useEffect(() => {
@@ -20,6 +21,7 @@ const App = () => {
     <Provider store={store}>
       {/* <div>Hello World</div> */}
       <Router>
+        <AddEventModal />
         <Switch>
           <Route path='/' component={Home} />
           <Route path='/register' component={Register} />
