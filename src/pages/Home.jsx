@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import NavBar from '../components/NavBar';
 import Headers from '../components/Header';
 import './Home.css';

@@ -1,20 +1,12 @@
 import axios from 'axios';
-import { ADD_USER, GET_USER, REMOVE_USER, SET_LOADING } from './types';
+import { ADD_USER, GET_USER, SET_LOADING } from './types';
 
 // Set loader
 export const setLoading = () => {
-  console.log('loader started');
   return {
     type: SET_LOADING,
   };
 };
-
-// export const setLoading = () => async dispatch => {
-//   console.log('loader started')
-//   dispatch({
-//     type: SET_LOADING,
-//   });
-// };
 
 // Add new Users
 export const addUser = data => async dispatch => {
