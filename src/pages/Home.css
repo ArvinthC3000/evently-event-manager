@@ -54,3 +54,98 @@
 }
 
 /* NAVBAR COMPONENT CSS - ENDS */
+
+/* EVENT COMPONENT CSS - ENDS */
+
+.event-content-wrapper {
+  display: block;
+  position: relative;
+  width: 75%;
+  padding: 0 2rem;
+}
+
+.screen-title {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-light);
+  letter-spacing: 1px;
+}
+
+.event-content-header {
+  height: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.create-new {
+  background-color: var(--color-main);
+  color: var(--color-dark);
+  border: none;
+  padding: 0 1.8rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: absolute;
+  min-width: 10rem;
+  top: 0;
+  right: 8rem;
+  font-size: 1.4rem;
+  height: 3.5rem;
+}
+
+.create-new span {
+  font-size: 2rem;
+  margin-right: 5px;
+}
+
+.screen-content-counts {
+  color: var(--color-dark-light);
+}
+
+.event-wrapper {
+  margin: 3rem 0;
+  display: flex;
+  grid-gap: 2rem;
+  gap: 2rem;
+  flex-direction: column;
+  margin-right: 6rem;
+}
+
+.event-item {
+  background-color: var(--color-dark);
+  border-radius: 5px;
+  padding: 2rem;
+}
+
+.event-title {
+  color: var(--color-main);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.event-description {
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  color: var(--color-light);
+}
+
+hr {
+  height: 1px;
+  border: none;
+  background-color: #545454;
+}
+.profile {
+  display: inline-block;
+  background-color: #d2d8ddb0;
+  padding: 3px;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  border: 3px solid var(--color-main);
+  margin-right: 0.7rem;
+}
