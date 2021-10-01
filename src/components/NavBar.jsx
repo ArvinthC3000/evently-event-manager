@@ -1,23 +1,44 @@
 import PropTypes from 'prop-types';
 import { FaCalendar, FaStar, FaUser, FaUserFriends } from 'react-icons/fa';
+import { connect } from 'react-redux';
+import { getEvents } from '../actions/eventActions';
 
-const NavBar = props => {
+const NavBar = ({ event: { current }, getEvents }) => {
+  console.log('current', current);
+  const handleClick = e => {
+    console.log(e.target.title);
+    getEvents(e.target.title);
+  };
   return (
     <div>
       <h2 className='category-header'>Browse Categories</h2>
       <div className='compartments'>
         <div className='compartment-header'>Events</div>
         <ul className='compartment-item-container'>
-          <li className='compartment-item'>
+          <li
+            title='ALL'
+            className={`compartment-item ${current === 'ALL' && 'active'}`}
+            onClick={handleClick}>
             <FaCalendar /> All
           </li>
-          <li className='compartment-item'>
+          <li
+            title='IMPORTANT'
+            className={`compartment-item ${
+              current === 'IMPORTANT' && 'active'
+            }`}
+            onClick={handleClick}>
             <FaStar /> Important
           </li>
-          <li className='compartment-item'>
+          <li
+            title='PERSONAL'
+            className={`compartment-item ${current === 'PERSONAL' && 'active'}`}
+            onClick={handleClick}>
             <FaUser /> Personal
           </li>
-          <li className='compartment-item'>
+          <li
+            title='PUBLIC'
+            className={`compartment-item ${current === 'PUBLIC' && 'active'}`}
+            onClick={handleClick}>
             <FaUserFriends /> Public
           </li>
         </ul>
@@ -26,6 +47,13 @@ const NavBar = props => {
   );
 };
 
-NavBar.propTypes = {};
+NavBar.propTypes = {
+  getEvents: PropTypes.func.isRequired,
+  event: PropTypes.object.isRequired,
+};
 
-export default NavBar;
+const mapStateToProps = state => ({
+  event: state.events,
+});
+
+export default connect(mapStateToProps, { getEvents })(NavBar);

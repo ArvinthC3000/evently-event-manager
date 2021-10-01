@@ -7,6 +7,7 @@ import Event from './Event';
 const Content = ({ event: { events }, getEvents }) => {
   useEffect(() => {
     getEvents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
