@@ -1,0 +1,56 @@
+/* HEADER COMPONENT CSS - STARTS */
+.main-header {
+  background-color: var(--color-dark);
+  padding: 0 5rem;
+  font-size: xx-large;
+}
+
+.header-container {
+  margin: 0 7rem;
+}
+
+.home-container {
+  height: 100%;
+  background-color: var(--color-bg);
+}
+
+.nav-wrapper {
+  width: 25%;
+}
+/* HEADER COMPONENT CSS - ENDS */
+
+/* NAVBAR COMPONENT CSS - STARTS */
+
+.content-wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  padding: 0 12rem;
+  margin-top: 2rem;
+}
+
+.category-header {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-dark-light);
+  font-size: 1.5em;
+  line-height: 2;
+  text-align: left;
+}
+
+.compartments {
+  margin: 1rem 0;
+}
+
+.compartment-header {
+  color: #696d9791;
+}
+
+.compartment-item {
+  color: var(--color-light-gray);
+  font-size: 1.1rem;
+  margin: 0.7rem 0;
+}
+
+/* NAVBAR COMPONENT CSS - ENDS */
