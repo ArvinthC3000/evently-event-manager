@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Register from './pages/Register';
+import Login from './pages/Login';
+import Home from './pages/Home';
 
 const App = () => {
   useEffect(() => {
@@ -19,7 +21,9 @@ const App = () => {
       {/* <div>Hello World</div> */}
       <Router>
         <Switch>
+          <Route path='/' component={Home} />
           <Route path='/register' component={Register} />
+          <Route path='/login' component={Login} />
         </Switch>
       </Router>
     </Provider>
