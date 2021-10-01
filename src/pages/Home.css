@@ -53,6 +53,10 @@
   margin: 0.7rem 0;
 }
 
+.compartment-item.active {
+  color: var(--color-main);
+}
+
 /* NAVBAR COMPONENT CSS - ENDS */
 
 /* EVENT COMPONENT CSS - ENDS */

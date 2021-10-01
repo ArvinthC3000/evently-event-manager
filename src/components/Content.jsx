@@ -1,20 +1,13 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getEvents } from '../actions/eventActions';
 import Event from './Event';
 
-const Content = props => {
-  const [event, setEvent] = useState([]);
-
+const Content = ({ event: { events }, getEvents }) => {
   useEffect(() => {
     getEvents();
   }, []);
-
-  const getEvents = async () => {
-    const response = await fetch('http://localhost:5000/events');
-    const data = await response.json();
-    setEvent(data);
-  };
 
   return (
     <>
@@ -26,14 +19,20 @@ const Content = props => {
         </button>
       </div>
       <div className='event-wrapper'>
-        {[...event, ...event, ...event, ...event].map((event, index) => (
-          <Event key={index} {...event} />
-        ))}
+        {events.length &&
+          events.map((event, index) => <Event key={index} {...event} />)}
       </div>
     </>
   );
 };
 
-Content.propTypes = {};
+Content.propTypes = {
+  getEvents: PropTypes.func.isRequired,
+  event: PropTypes.object.isRequired,
+};
 
-export default Content;
+const mapStateToProps = state => ({
+  event: state.events,
+});
+
+export default connect(mapStateToProps, { getEvents })(Content);
