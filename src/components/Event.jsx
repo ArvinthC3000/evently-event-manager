@@ -3,7 +3,6 @@ import { FaStar, FaUserClock, FaUserFriends } from 'react-icons/fa';
 
 const Event = props => {
   const currentUser = 1;
-  console.log(props);
   const {
     date,
     userName,

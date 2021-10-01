@@ -3,7 +3,6 @@ import { GET_EVENTS, SET_EVENT_TYPE, SET_LOADING } from './types';
 
 // Set loader
 export const setLoading = () => {
-  console.log('loader started');
   return {
     type: SET_LOADING,
   };

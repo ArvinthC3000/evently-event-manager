@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { getEvents } from '../actions/eventActions';
 
 const NavBar = ({ event: { current }, getEvents }) => {
-  console.log('current', current);
   const handleClick = e => {
-    console.log(e.target.title);
     getEvents(e.target.title);
   };
   return (
