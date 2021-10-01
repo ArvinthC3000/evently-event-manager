@@ -2,7 +2,7 @@ import { ADD_USER, SET_LOADING } from '../actions/types';
 
 const initialState = {
   user: null,
-  current: null,
+  currentUserId: 1,
   loading: false,
   error: null,
 };

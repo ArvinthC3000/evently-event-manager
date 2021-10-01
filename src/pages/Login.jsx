@@ -7,7 +7,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Preloader from '../components/Preloader';
 
-const Login = ({ getUser, history, user: { current, loading } }) => {
+const Login = ({
+  getUser,
+  history,
+  user: { currentUserId: current, loading },
+}) => {
   if (current) {
     history.push('/');
   }
@@ -79,7 +83,7 @@ const Login = ({ getUser, history, user: { current, loading } }) => {
 
 Login.propTypes = {
   getUser: PropTypes.func.isRequired,
-  current: PropTypes.object.isRequired,
+  currentUserId: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({

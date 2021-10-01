@@ -8,7 +8,7 @@ import {
 const initialState = {
   events: [],
   current: 'ALL',
-  userId: null,
+  userId: 1,
   loading: false,
   error: null,
   success: null,
