@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
+import { FaStar, FaUserClock, FaUserFriends } from 'react-icons/fa';
 
 const Event = props => {
+  const currentUser = 1;
   console.log(props);
   const {
     date,
@@ -11,6 +13,7 @@ const Event = props => {
     isCancelled,
     id,
     userId,
+    markedImportant,
   } = props;
   return (
     <div className='event-item'>
@@ -20,9 +23,35 @@ const Event = props => {
       </div>
       <div className='event-description'>{description}</div>
       <hr />
-      {'This a event with id ' + 0 + ' event.id'}
+      <div className='addition-description'>
+        {isPublic ? (
+          <div className='event-attendees'>
+            <FaUserFriends style={userIconStyles} /> 1 Joined
+          </div>
+        ) : (
+          <div className='event-attendees'>
+            <FaUserClock style={privateUserIconStyles} /> Only You
+          </div>
+        )}
+        <div className='rightFloat'>
+          <span>{isPublic ? 'Public' : 'Private'}</span>{' '}
+          <FaStar
+            color={markedImportant.includes(currentUser) ? 'gold' : '#b2bdbd'}
+          />
+        </div>
+      </div>
     </div>
   );
+};
+
+const userIconStyles = {
+  marginRight: '10px',
+  color: '#71c6dd',
+};
+
+const privateUserIconStyles = {
+  marginRight: '10px',
+  color: '#c771dd',
 };
 
 Event.propTypes = {};
