@@ -3,7 +3,10 @@ import { FaCalendar, FaStar, FaUser, FaUserFriends } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import { getEvents } from '../actions/eventActions';
 
-const NavBar = ({ event: { current }, getEvents }) => {
+const NavBar = ({ event, getEvents }) => {
+  console.log(event);
+  const { current } = event;
+  console.log(current);
   const handleClick = e => {
     getEvents(e.target.title);
   };

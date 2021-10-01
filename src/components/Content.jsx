@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 import { getEvents } from '../actions/eventActions';
 import Event from './Event';
 
-const Content = ({ event: { events }, getEvents }) => {
+const Content = ({ event: { events, current }, getEvents }) => {
   useEffect(() => {
-    getEvents();
+    getEvents(current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <div className='event-content-header'>
-        <div className='screen-title'>Events</div>
+        <div className='screen-title'>{current} Events</div>
         <div className='screen-content-counts'>12 Events available</div>
         <button className='create-new'>
           <span>+ </span> New Event
