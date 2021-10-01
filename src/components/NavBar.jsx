@@ -1,11 +1,5 @@
 import PropTypes from 'prop-types';
-import {
-  FaCalendar,
-  FaPersonBooth,
-  FaStar,
-  FaUser,
-  FaUserFriends,
-} from 'react-icons/fa';
+import { FaCalendar, FaStar, FaUser, FaUserFriends } from 'react-icons/fa';
 
 const NavBar = props => {
   return (
