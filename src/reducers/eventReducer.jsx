@@ -17,6 +17,9 @@ const initialState = {
   success: null,
   currentEvent: {},
 };
+const sortEventByDate = list => {
+  return list.sort((a, b) => new Date(a.start) - new Date(b.start));
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action) => {
@@ -40,6 +43,8 @@ export default (state = initialState, action) => {
         // loading: false,
       };
     case GET_EVENTS:
+      console.log(sortEventByDate(action.payload));
+      console.log(action.payload);
       return {
         ...state,
         events: action.payload,
