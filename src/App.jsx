@@ -23,9 +23,9 @@ const App = () => {
       <Router>
         <AddEventModal />
         <Switch>
-          <Route path='/' component={Home} />
-          <Route path='/register' component={Register} />
-          <Route path='/login' component={Login} />
+          <Route exact path='/' component={Home} />
+          <Route exact path='/register' component={Register} />
+          <Route exact path='/login' component={Login} />
         </Switch>
       </Router>
     </Provider>

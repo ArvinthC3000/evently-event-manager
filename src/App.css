@@ -74,3 +74,18 @@
 .event-modal h3 {
   text-align: start;
 }
+
+.switch-container {
+  display: inline;
+}
+
+.starComp {
+  height: 2rem;
+  width: 2rem;
+  float: right;
+  transform: translate(-1rem, 50%);
+}
+
+.data-container {
+  margin-top: 6px;
+}
