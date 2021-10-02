@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import { FaStar, FaUserClock, FaUserFriends } from 'react-icons/fa';
+import { connect } from 'react-redux';
+import { setCurrentEvent } from '../actions/eventActions';
 
-const Event = props => {
+const Event = ({ setCurrentEvent, data }) => {
+  console.log(data);
   const currentUser = 1;
   const {
     date,
@@ -13,13 +16,18 @@ const Event = props => {
     id,
     userId,
     markedImportant,
-  } = props;
+  } = data;
   return (
     <div className='event-item'>
-      <div className='event-title'>
-        <div className='profile'>{userName ? userName.slice(0, 1) : ''}</div>{' '}
-        {title}
-      </div>
+      <a
+        href='#edit-event-modal'
+        className='modal-trigger'
+        onClick={() => setCurrentEvent(data)}>
+        <div className='event-title'>
+          <div className='profile'>{userName ? userName.slice(0, 1) : ''}</div>{' '}
+          {title}
+        </div>
+      </a>
       <div className='event-description'>{description}</div>
       <hr />
       <div className='addition-description'>
@@ -53,6 +61,8 @@ const privateUserIconStyles = {
   color: '#c771dd',
 };
 
-Event.propTypes = {};
+Event.propTypes = {
+  setCurrentEvent: PropTypes.func.isRequired,
+};
 
-export default Event;
+export default connect(null, { setCurrentEvent })(Event);
