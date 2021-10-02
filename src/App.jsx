@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import AddEventModal from './modals/AddEventModal';
+import EditEventModal from './modals/EditEventModal';
 
 const App = () => {
   useEffect(() => {
@@ -22,6 +23,7 @@ const App = () => {
       {/* <div>Hello World</div> */}
       <Router>
         <AddEventModal />
+        <EditEventModal />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/register' component={Register} />

@@ -23,7 +23,7 @@ const Content = ({ event: { events, current }, getEvents }) => {
       </div>
       <div className='event-wrapper'>
         {events.length &&
-          events.map((event, index) => <Event key={index} {...event} />)}
+          events.map((event, index) => <Event key={index} data={event} />)}
       </div>
     </>
   );
