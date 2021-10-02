@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { v4 } from 'uuid';
-import { ADD_EVENT, GET_EVENTS, SET_EVENT_TYPE, SET_LOADING } from './types';
+import {
+  ADD_EVENT,
+  GET_EVENTS,
+  SET_CURRENT_EVENT,
+  SET_EVENT_TYPE,
+  SET_LOADING,
+} from './types';
 
 // Set loader
 export const setLoading = () => {
@@ -41,6 +47,13 @@ export const getEvents = current => async dispatch => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const setCurrentEvent = event => async dispatch => {
+  dispatch({
+    type: SET_CURRENT_EVENT,
+    payload: event,
+  });
 };
 
 // Add New Event

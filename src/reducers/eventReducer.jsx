@@ -1,6 +1,7 @@
 import {
   ADD_EVENT,
   GET_EVENTS,
+  SET_CURRENT_EVENT,
   SET_EVENT_TYPE,
   SET_LOADING,
 } from '../actions/types';
@@ -12,6 +13,7 @@ const initialState = {
   loading: false,
   error: null,
   success: null,
+  currentEvent: {},
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -27,6 +29,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         events: [...state.events, action.payload],
+        // loading: false,
+      };
+    case SET_CURRENT_EVENT:
+      return {
+        ...state,
+        currentEvent: action.payload,
         // loading: false,
       };
     case GET_EVENTS:
