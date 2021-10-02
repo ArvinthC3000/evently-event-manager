@@ -8,9 +8,8 @@ import { addEvent } from '../actions/eventActions';
 import {} from '../actions/userActions';
 
 const AddEventModal = ({ addEvent, user: { currentUserId: current } }) => {
-  console.log(current);
-  const [eventTitle, setEventTitle] = useState(null);
-  const [eventDecription, setEventDecription] = useState(null);
+  const [eventTitle, setEventTitle] = useState('');
+  const [eventDecription, setEventDecription] = useState('');
   const [isImportant, setIsImportant] = useState(false);
   const [isPublic, setIsPublic] = useState(true);
   const [startDate, setStartDate] = useState(null);
@@ -25,6 +24,7 @@ const AddEventModal = ({ addEvent, user: { currentUserId: current } }) => {
     M.Modal.init(elems);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => setElementSelector(null);
   }, []);
 
   const onSubmit = () => {
@@ -42,6 +42,13 @@ const AddEventModal = ({ addEvent, user: { currentUserId: current } }) => {
       isPublic,
       markedImportant: isImportant ? [current] : [],
     });
+
+    setEventTitle('');
+    setEventDecription(null);
+    setStartDate(null);
+    setEndDate(null);
+    setIsImportant(null);
+    setIsPublic(null);
     elementSelector.M_Modal.close();
   };
 
@@ -61,7 +68,7 @@ const AddEventModal = ({ addEvent, user: { currentUserId: current } }) => {
             </div>
             <div className='col s2'>
               <label htmlFor='isPrivate'>Is private</label>
-              <div class='switch'>
+              <div className='switch'>
                 <label>
                   No
                   <input
@@ -69,7 +76,7 @@ const AddEventModal = ({ addEvent, user: { currentUserId: current } }) => {
                     onChange={() => setIsPublic(!isPublic)}
                     checked={!isPublic}
                   />
-                  <span class='lever'></span>
+                  <span className='lever'></span>
                   Yes
                 </label>
               </div>
