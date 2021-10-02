@@ -44,7 +44,7 @@ const EditEventModal = ({
   useEffect(() => {
     if (id) {
       setEventTitle(title);
-      setEventDecription(description);
+      setEventDecription('');
       setIsImportant(markedImportant?.includes(current));
       setIsPublic(isPublicAlias);
       setStartDate(start);

@@ -9,6 +9,16 @@
   margin: 0 7rem;
 }
 
+.header-container .title {
+  display: flex;
+  align-items: center;
+}
+
+.title-logo {
+  margin-right: 1rem;
+  color: #71c6dd;
+}
+
 .home-container {
   height: 100%;
   background-color: var(--color-bg);
@@ -51,6 +61,7 @@
   color: var(--color-light-gray);
   font-size: 1.1rem;
   margin: 0.7rem 0;
+  cursor: pointer;
 }
 
 .compartment-item.active {
@@ -158,14 +169,15 @@ hr {
   background-color: #545454;
 }
 .profile {
-  display: inline-block;
-  background-color: #d2d8dd;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 3px;
   height: 2rem;
   width: 2rem;
   border-radius: 1rem;
   text-align: center;
-  border: 3px solid var(--color-main);
+  border: 1px solid var(--color-main);
   margin-right: 0.7rem;
 }
 

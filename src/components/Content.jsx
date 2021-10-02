@@ -14,7 +14,9 @@ const Content = ({ event: { events, current }, getEvents }) => {
     <>
       <div className='event-content-header'>
         <div className='screen-title'>{current} Events</div>
-        <div className='screen-content-counts'>12 Events available</div>
+        <div className='screen-content-counts'>
+          {events.length || 0} Events available
+        </div>
         <a href='#add-event-modal' className='modal-trigger'>
           <button className='create-new'>
             <span>+ </span> New Event

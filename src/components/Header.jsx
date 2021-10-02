@@ -1,9 +1,13 @@
+import { FaCalendar } from 'react-icons/fa';
+
 const NavBar = props => {
   return (
     <>
       <nav className='main-header'>
         <div className='header-container'>
-          <div className='title'>Evently</div>
+          <div className='title'>
+            <FaCalendar className='title-logo' /> Evently
+          </div>
         </div>
         {/* <SearchBar /> */}
         {/* <form id='searchForm' class='header__search' method='GET' action='/'>
