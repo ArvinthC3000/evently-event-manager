@@ -3,38 +3,46 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import { connect } from 'react-redux';
+import { addEvent } from '../actions/eventActions';
+import {} from '../actions/userActions';
 
-const AddEventModal = props => {
-  var elems = document.querySelectorAll('.modal');
-
+const AddEventModal = ({ addEvent, user: { currentUserId: current } }) => {
+  console.log(current);
+  const [eventTitle, setEventTitle] = useState(null);
+  const [eventDecription, setEventDecription] = useState(null);
   const [isImportant, setIsImportant] = useState(false);
   const [isPublic, setIsPublic] = useState(true);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const handleValue = e => {
-    console.log(e.target.props.title.toUpperCase());
-    if (e.target.props.title.toUpperCase() === 'START')
-      setStartDate(e.target.value);
-    if (e.target.props.title.toUpperCase() === 'END')
-      setEndDate(e.target.value);
-  };
+  const [elementSelector, setElementSelector] = useState(null);
 
   useEffect(() => {
+    var elems = document.querySelectorAll('.modal');
+    elems.forEach(item => {
+      item.id === 'add-event-modal' && setElementSelector(item);
+    });
     M.Modal.init(elems);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const toggleStar = () => {
-    setIsImportant(!isImportant);
-  };
-
-  const handleSwitch = () => {
-    setIsPublic(!isPublic);
-  };
-
   const onSubmit = () => {
-    // const elementSelector = elems.filter(item => item.id === 'add-event-modal');
-    // elementSelector.M_Modal.close();
+    if (!eventTitle || !startDate || !endDate) {
+      M.toast({ html: 'Please fill all required fields (*)' });
+      return;
+    }
+
+    addEvent({
+      title: eventTitle,
+      description: eventDecription,
+      start: startDate,
+      end: endDate,
+      isImportant,
+      isPublic,
+      markedImportant: isImportant ? [current] : [],
+    });
+    elementSelector.M_Modal.close();
   };
 
   return (
@@ -48,7 +56,7 @@ const AddEventModal = props => {
                 color={isImportant ? 'gold' : '#b2bdbd'}
                 className='starComp'
                 width='2'
-                onClick={toggleStar}
+                onClick={() => setIsImportant(!isImportant)}
               />
             </div>
             <div className='col s2'>
@@ -58,7 +66,7 @@ const AddEventModal = props => {
                   No
                   <input
                     type='checkbox'
-                    onChange={handleSwitch}
+                    onChange={() => setIsPublic(!isPublic)}
                     checked={!isPublic}
                   />
                   <span class='lever'></span>
@@ -75,6 +83,8 @@ const AddEventModal = props => {
                 type='text'
                 className='validate'
                 required
+                onChange={e => setEventTitle(e.target.value)}
+                value={eventTitle}
               />
               <label htmlFor='first_name'>Event Title</label>
             </div>
@@ -84,7 +94,7 @@ const AddEventModal = props => {
                 placeholder='Select date and time'
                 title='Start'
                 value={startDate}
-                onChange={handleValue}
+                onChange={e => setStartDate(e.target.value)}
               />
             </div>
             <div className='data-container col s3'>
@@ -93,7 +103,7 @@ const AddEventModal = props => {
                 placeholder='Select date and time'
                 title='End'
                 value={endDate}
-                onChange={handleValue}
+                onChange={e => setEndDate(e.target.value)}
               />
             </div>
           </div>
@@ -103,7 +113,9 @@ const AddEventModal = props => {
                 <div className='input-field col s12'>
                   <textarea
                     id='textarea1'
-                    className='materialize-textarea'></textarea>
+                    className='materialize-textarea'
+                    onChange={e => setEventDecription(e.target.value)}
+                    value={eventDecription}></textarea>
                   <label htmlFor='textarea1'>Description</label>
                 </div>
               </div>
@@ -129,11 +141,17 @@ const AddEventModal = props => {
   );
 };
 
-AddEventModal.propTypes = {};
+AddEventModal.propTypes = {
+  addEvent: PropTypes.func.isRequired,
+};
 
 const modalStyle = {
   width: '65%',
   //   height: '75%',
 };
 
-export default AddEventModal;
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps, { addEvent })(AddEventModal);

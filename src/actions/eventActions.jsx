@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { GET_EVENTS, SET_EVENT_TYPE, SET_LOADING } from './types';
+import { v4 } from 'uuid';
+import { ADD_EVENT, GET_EVENTS, SET_EVENT_TYPE, SET_LOADING } from './types';
 
 // Set loader
 export const setLoading = () => {
@@ -8,7 +9,7 @@ export const setLoading = () => {
   };
 };
 
-// Add new Users
+// Get Events
 export const getEvents = current => async dispatch => {
   try {
     dispatch({
@@ -39,6 +40,34 @@ export const getEvents = current => async dispatch => {
     });
   } catch (error) {
     console.log(error);
+  }
+};
+
+// Add New Event
+export const addEvent = data => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    console.log(data);
+    const postData = { ...data, id: v4() };
+    const res = await axios.post(
+      'http://localhost:5000/events',
+      postData,
+      config
+    );
+
+    console.log(res);
+
+    dispatch({
+      type: ADD_EVENT,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err);
   }
 };
 
