@@ -4,17 +4,13 @@ import { connect } from 'react-redux';
 import { setCurrentEvent } from '../actions/eventActions';
 
 const Event = ({ setCurrentEvent, data }) => {
-  console.log(data);
   const currentUser = 1;
   const {
-    date,
+    // date,
     userName,
     description,
     title,
     isPublic,
-    isCancelled,
-    id,
-    userId,
     markedImportant,
   } = data;
   return (

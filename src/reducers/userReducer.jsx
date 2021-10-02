@@ -17,7 +17,6 @@ export default (state = initialState, action) => {
         // loading: false,
       };
     case SET_LOADING:
-      console.log('loading');
       return {
         ...state,
         loading: true,

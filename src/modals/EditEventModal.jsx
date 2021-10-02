@@ -6,12 +6,13 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import { connect } from 'react-redux';
 // import { currentEvent } from '../actions/eventActions';
 import {} from '../actions/userActions';
-import { editEvent } from '../actions/eventActions';
+import { editEvent, deleteEvent } from '../actions/eventActions';
 
 const EditEventModal = ({
   user: { currentUserId: current },
   events: { currentEvent },
   editEvent,
+  deleteEvent,
 }) => {
   const {
     title,
@@ -37,7 +38,6 @@ const EditEventModal = ({
     });
     M.Modal.init(elems);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => setElementSelector(null);
   }, []);
 
@@ -49,6 +49,8 @@ const EditEventModal = ({
     setIsPublic(isPublicAlias);
     setStartDate(start);
     setEndDate(end);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentEvent]);
 
   const onSubmit = () => {
@@ -77,7 +79,11 @@ const EditEventModal = ({
     elementSelector.M_Modal.close();
   };
 
-  const deleteEvent = () => {};
+  const deleteHandler = () => {
+    deleteEvent(id);
+    M.toast({ html: 'Event deleted successfully' });
+    elementSelector.M_Modal.close();
+  };
 
   return (
     <div id='edit-event-modal' className='modal event-modal' style={modalStyle}>
@@ -168,7 +174,7 @@ const EditEventModal = ({
           href='#!'
           className='waves-effect red waves-dark btn'
           style={{ color: '#FFF', marginRight: '1rem' }}
-          onClick={deleteEvent}>
+          onClick={deleteHandler}>
           Delete
         </a>
         <a
@@ -185,6 +191,7 @@ const EditEventModal = ({
 EditEventModal.propTypes = {
   events: PropTypes.object.isRequired,
   editEvent: PropTypes.func.isRequired,
+  deleteEvent: PropTypes.func.isRequired,
 };
 
 const modalStyle = {
@@ -197,4 +204,6 @@ const mapStateToProps = state => ({
   events: state.events,
 });
 
-export default connect(mapStateToProps, { editEvent })(EditEventModal);
+export default connect(mapStateToProps, { editEvent, deleteEvent })(
+  EditEventModal
+);

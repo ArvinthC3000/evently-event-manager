@@ -1,5 +1,6 @@
 import {
   ADD_EVENT,
+  DELETE_EVENT,
   GET_EVENTS,
   SET_CURRENT_EVENT,
   SET_EVENT_TYPE,
@@ -51,7 +52,11 @@ export default (state = initialState, action) => {
           ...state.events.filter(item => item.id !== action.payload.id),
           action.payload,
         ],
-        // loading: false,
+      };
+    case DELETE_EVENT:
+      return {
+        ...state,
+        events: [...state.events.filter(item => item.id !== action.payload)],
       };
     case SET_LOADING:
       return {

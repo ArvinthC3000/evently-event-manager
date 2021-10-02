@@ -2,6 +2,7 @@ import axios from 'axios';
 import { v4 } from 'uuid';
 import {
   ADD_EVENT,
+  DELETE_EVENT,
   GET_EVENTS,
   SET_CURRENT_EVENT,
   SET_EVENT_TYPE,
@@ -66,15 +67,12 @@ export const addEvent = data => async dispatch => {
   };
 
   try {
-    console.log(data);
     const postData = { ...data, id: v4() };
     const res = await axios.post(
       'http://localhost:5000/events',
       postData,
       config
     );
-
-    console.log(res);
 
     dispatch({
       type: ADD_EVENT,
@@ -107,6 +105,19 @@ export const editEvent = data => async dispatch => {
   } catch (err) {
     console.log(err);
   }
+};
+
+// Delete Event
+export const deleteEvent = id => async dispatch => {
+  try {
+    await axios.delete(`http://localhost:5000/events/${id}`);
+  } catch (err) {
+    console.log(err);
+  }
+  dispatch({
+    type: DELETE_EVENT,
+    payload: id,
+  });
 };
 
 const getIds = async id => {

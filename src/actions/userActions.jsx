@@ -11,7 +11,6 @@ export const setLoading = () => {
 // Add new Users
 export const addUser = data => async dispatch => {
   try {
-    console.log(data);
     dispatch({
       type: ADD_USER,
       payload: 'success',
@@ -29,7 +28,6 @@ export const getUser = data => async dispatch => {
     const user = await axios.get(
       `http://localhost:5000/users?email=${email}&password=${password}`
     );
-    console.log(user.data);
     dispatch({
       type: GET_USER,
       payload: user.data,
