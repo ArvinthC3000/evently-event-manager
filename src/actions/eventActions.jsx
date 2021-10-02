@@ -6,6 +6,7 @@ import {
   SET_CURRENT_EVENT,
   SET_EVENT_TYPE,
   SET_LOADING,
+  UPDATE_EVENT,
 } from './types';
 
 // Set loader
@@ -77,6 +78,30 @@ export const addEvent = data => async dispatch => {
 
     dispatch({
       type: ADD_EVENT,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Edit Event
+export const editEvent = data => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const res = await axios.put(
+      `http://localhost:5000/events/${data.id}`,
+      data,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_EVENT,
       payload: res.data,
     });
   } catch (err) {

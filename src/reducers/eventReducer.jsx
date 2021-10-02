@@ -4,6 +4,7 @@ import {
   SET_CURRENT_EVENT,
   SET_EVENT_TYPE,
   SET_LOADING,
+  UPDATE_EVENT,
 } from '../actions/types';
 
 const initialState = {
@@ -41,6 +42,15 @@ export default (state = initialState, action) => {
       return {
         ...state,
         events: action.payload,
+        // loading: false,
+      };
+    case UPDATE_EVENT:
+      return {
+        ...state,
+        events: [
+          ...state.events.filter(item => item.id !== action.payload.id),
+          action.payload,
+        ],
         // loading: false,
       };
     case SET_LOADING:

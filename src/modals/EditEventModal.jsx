@@ -6,30 +6,50 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import { connect } from 'react-redux';
 // import { currentEvent } from '../actions/eventActions';
 import {} from '../actions/userActions';
+import { editEvent } from '../actions/eventActions';
 
 const EditEventModal = ({
   user: { currentUserId: current },
   events: { currentEvent },
+  editEvent,
 }) => {
-  console.log(currentEvent);
+  const {
+    title,
+    description,
+    start,
+    end,
+    isPublic: isPublicAlias,
+    markedImportant,
+    id,
+  } = currentEvent;
   const [eventTitle, setEventTitle] = useState('');
   const [eventDecription, setEventDecription] = useState('');
   const [isImportant, setIsImportant] = useState(false);
   const [isPublic, setIsPublic] = useState(true);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [elementSelector, setElementSelector] = useState(null);
 
   useEffect(() => {
-    // var elems = document.querySelectorAll('.modal');
-    // elems.forEach(item => {
-    //   item.id === 'edit-event-modal' && setElementSelector(item);
-    // });
-    // M.Modal.init(elems);
+    var elems = document.querySelectorAll('.modal');
+    elems.forEach(item => {
+      item.id === 'edit-event-modal' && setElementSelector(item);
+    });
+    M.Modal.init(elems);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => setElementSelector(null);
   }, []);
+
+  useEffect(() => {
+    console.log(currentEvent);
+    setEventTitle(title);
+    setEventDecription(description);
+    setIsImportant(markedImportant?.includes(current));
+    setIsPublic(isPublicAlias);
+    setStartDate(start);
+    setEndDate(end);
+  }, [currentEvent]);
 
   const onSubmit = () => {
     if (!eventTitle || !startDate || !endDate) {
@@ -37,15 +57,16 @@ const EditEventModal = ({
       return;
     }
 
-    // addEvent({
-    //   title: eventTitle,
-    //   description: eventDecription,
-    //   start: startDate,
-    //   end: endDate,
-    //   isImportant,
-    //   isPublic,
-    //   markedImportant: isImportant ? [current] : [],
-    // });
+    editEvent({
+      id,
+      title: eventTitle,
+      description: eventDecription,
+      start: startDate,
+      end: endDate,
+      isImportant,
+      isPublic,
+      markedImportant: isImportant ? [current] : [],
+    });
 
     setEventTitle('');
     setEventDecription(null);
@@ -56,12 +77,14 @@ const EditEventModal = ({
     elementSelector.M_Modal.close();
   };
 
+  const deleteEvent = () => {};
+
   return (
     <div id='edit-event-modal' className='modal event-modal' style={modalStyle}>
       <div className='row'>
         <form className='col s12'>
           <div className='switch-container row'>
-            <h3 className='col s6'>Add Event</h3>
+            <h3 className='col s6'>Edit Event</h3>
             <div className='col s4'>
               <FaStar
                 color={isImportant ? 'gold' : '#b2bdbd'}
@@ -71,7 +94,7 @@ const EditEventModal = ({
               />
             </div>
             <div className='col s2'>
-              <label htmlFor='isPrivate'>Is private</label>
+              <label htmlFor='isPrivate'>Is private?</label>
               <div className='switch'>
                 <label>
                   No
@@ -143,9 +166,16 @@ const EditEventModal = ({
         </a>
         <a
           href='#!'
+          className='waves-effect red waves-dark btn'
+          style={{ color: '#FFF', marginRight: '1rem' }}
+          onClick={deleteEvent}>
+          Delete
+        </a>
+        <a
+          href='#!'
           className='waves-effect blue waves-light btn'
           onClick={onSubmit}>
-          Enter
+          Save
         </a>
       </div>
     </div>
@@ -154,6 +184,7 @@ const EditEventModal = ({
 
 EditEventModal.propTypes = {
   events: PropTypes.object.isRequired,
+  editEvent: PropTypes.func.isRequired,
 };
 
 const modalStyle = {
@@ -166,4 +197,4 @@ const mapStateToProps = state => ({
   events: state.events,
 });
 
-export default connect(mapStateToProps, {})(EditEventModal);
+export default connect(mapStateToProps, { editEvent })(EditEventModal);

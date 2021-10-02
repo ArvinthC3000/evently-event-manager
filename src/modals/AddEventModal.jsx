@@ -141,7 +141,7 @@ const AddEventModal = ({ addEvent, user: { currentUserId: current } }) => {
           href='#!'
           className='waves-effect blue waves-light btn'
           onClick={onSubmit}>
-          Enter
+          Add
         </a>
       </div>
     </div>
