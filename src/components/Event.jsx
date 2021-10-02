@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { FaStar, FaUserClock, FaUserFriends } from 'react-icons/fa';
+import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { setCurrentEvent } from '../actions/eventActions';
 
@@ -12,7 +13,10 @@ const Event = ({ setCurrentEvent, data }) => {
     title,
     isPublic,
     markedImportant,
+    start,
+    end,
   } = data;
+
   return (
     <div className='event-item'>
       <a
@@ -22,6 +26,13 @@ const Event = ({ setCurrentEvent, data }) => {
         <div className='event-title'>
           <div className='profile'>{userName ? userName.slice(0, 1) : ''}</div>{' '}
           {title}
+          <span className='date-time-container'>
+            <span>
+              <Moment format='MMM do, '>{start}</Moment>
+              <Moment format='h:mm - '>{start}</Moment>
+              <Moment format='h:mm A'>{end}</Moment>
+            </span>
+          </span>
         </div>
       </a>
       <div className='event-description'>{description}</div>
