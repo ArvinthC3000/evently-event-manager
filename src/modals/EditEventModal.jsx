@@ -27,8 +27,8 @@ const EditEventModal = ({
   const [eventDecription, setEventDecription] = useState('');
   const [isImportant, setIsImportant] = useState(false);
   const [isPublic, setIsPublic] = useState(true);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [elementSelector, setElementSelector] = useState(null);
 
   useEffect(() => {
@@ -42,13 +42,14 @@ const EditEventModal = ({
   }, []);
 
   useEffect(() => {
-    console.log(currentEvent);
-    setEventTitle(title);
-    setEventDecription(description);
-    setIsImportant(markedImportant?.includes(current));
-    setIsPublic(isPublicAlias);
-    setStartDate(start);
-    setEndDate(end);
+    if (id) {
+      setEventTitle(title);
+      setEventDecription(description);
+      setIsImportant(markedImportant?.includes(current));
+      setIsPublic(isPublicAlias);
+      setStartDate(start);
+      setEndDate(end);
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentEvent]);
