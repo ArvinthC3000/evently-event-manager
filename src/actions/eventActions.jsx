@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { v4 } from 'uuid';
+import { URI } from '../constants';
 import {
   ADD_EVENT,
   DELETE_EVENT,
@@ -41,9 +42,7 @@ export const getEvents = current => async dispatch => {
         break;
     }
     // return;
-    const res = await axios.get(
-      `http://localhost:5000/api/events?${parameters}`
-    );
+    const res = await axios.get(`${URI}/api/events?${parameters}`);
     dispatch({
       type: GET_EVENTS,
       payload: res.data,
@@ -70,14 +69,7 @@ export const addEvent = data => async dispatch => {
 
   try {
     const postData = { ...data, id: v4() };
-    const res = await axios.post(
-      'http://localhost:5000/api/events',
-      postData,
-      config
-    );
-
-    console.log(postData);
-    console.log(res);
+    const res = await axios.post(`${URI}/api/events`, postData, config);
 
     dispatch({
       type: ADD_EVENT,
@@ -97,11 +89,7 @@ export const editEvent = data => async dispatch => {
   };
 
   try {
-    const res = await axios.put(
-      `http://localhost:5000/api/events/${data.id}`,
-      data,
-      config
-    );
+    const res = await axios.put(`${URI}api/events/${data.id}`, data, config);
 
     dispatch({
       type: UPDATE_EVENT,
@@ -115,7 +103,7 @@ export const editEvent = data => async dispatch => {
 // Delete Event
 export const deleteEvent = id => async dispatch => {
   try {
-    await axios.delete(`http://localhost:5000/api/events/${id}`);
+    await axios.delete(`${URI}/api/events/${id}`);
   } catch (err) {
     console.log(err);
   }

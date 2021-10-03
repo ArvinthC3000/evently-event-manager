@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const events = await Event.find().sort({
-      start: -1,
+      start: 1,
     });
     res.json(events);
   } catch (err) {
@@ -50,6 +50,76 @@ router.post('/', async (req, res) => {
     res.json({ event: event, msg: 'success' });
   } catch (err) {
     console.log(err);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   PUT api/events/:id
+// @desc    Update event
+// @access  Public
+router.put('/:id', async (req, res) => {
+  const {
+    title,
+    description,
+    start,
+    end,
+    isImportant,
+    isPublic,
+    markedImportant,
+  } = req.body;
+
+  // Build contact object
+  const eventFields = {};
+  if (title) eventFields.title = title;
+  if (description) eventFields.description = description;
+  if (start) eventFields.start = start;
+  if (end) eventFields.end = end;
+  if (isImportant) eventFields.isImportant = isImportant;
+  if (isPublic) eventFields.isPublic = isPublic;
+  if (markedImportant) eventFields.markedImportant = markedImportant;
+
+  try {
+    let event = await Event.findById(req.params.id);
+
+    if (!event) return res.status(404).json({ msg: 'Event not found' });
+
+    // // Make sure user owns contact
+    // if (contact.user.toString() !== req.user.id) {
+    //   return res.status(401).json({ msg: 'Not authorized' });
+    // }
+
+    event = await Event.findByIdAndUpdate(
+      req.params.id,
+      { $set: eventFields },
+      { new: true }
+    );
+
+    res.json(event);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   DELETE api/contacts/:id
+// @desc    Delete contact
+// @access  Private
+router.delete('/:id', async (req, res) => {
+  try {
+    let event = await Event.findById(req.params.id);
+
+    if (!event) return res.status(404).json({ msg: 'Event not found' });
+
+    //   // Make sure user owns Event
+    //   if (event.user.toString() !== req.user.id) {
+    //     return res.status(401).json({ msg: 'Not authorized' });
+    //   }
+
+    await Event.findByIdAndRemove(req.params.id);
+    console.log('event deleted');
+    res.json({ msg: 'Event removed' });
+  } catch (err) {
+    console.error(err.message);
     res.status(500).send('Server Error');
   }
 });

@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
     case ADD_EVENT:
       return {
         ...state,
-        events: [...state.events, action.payload],
+        events: sortEventByDate([...state.events, action.payload]),
         // loading: false,
       };
     case SET_CURRENT_EVENT:
@@ -43,25 +43,24 @@ export default (state = initialState, action) => {
         // loading: false,
       };
     case GET_EVENTS:
-      console.log(sortEventByDate(action.payload));
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
-        events: action.payload,
+        events: sortEventByDate(action.payload),
         // loading: false,
       };
     case UPDATE_EVENT:
       return {
         ...state,
-        events: [
-          ...state.events.filter(item => item.id !== action.payload.id),
+        events: sortEventByDate([
+          ...state.events.filter(item => item._id !== action.payload._id),
           action.payload,
-        ],
+        ]),
       };
     case DELETE_EVENT:
       return {
         ...state,
-        events: [...state.events.filter(item => item.id !== action.payload)],
+        events: [...state.events.filter(item => item._id !== action.payload)],
       };
     case SET_LOADING:
       return {

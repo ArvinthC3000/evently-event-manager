@@ -21,7 +21,7 @@ const EditEventModal = ({
     end,
     isPublic: isPublicAlias,
     markedImportant,
-    id,
+    _id,
   } = currentEvent;
   const [eventTitle, setEventTitle] = useState('');
   const [eventDecription, setEventDecription] = useState('');
@@ -42,7 +42,7 @@ const EditEventModal = ({
   }, []);
 
   useEffect(() => {
-    if (id) {
+    if (_id) {
       setEventTitle(title);
       setEventDecription(description);
       setIsImportant(markedImportant?.includes(current));
@@ -61,7 +61,7 @@ const EditEventModal = ({
     }
 
     editEvent({
-      id,
+      id: _id,
       title: eventTitle,
       description: eventDecription,
       start: startDate,
@@ -81,7 +81,7 @@ const EditEventModal = ({
   };
 
   const deleteHandler = () => {
-    deleteEvent(id);
+    deleteEvent(_id);
     M.toast({ html: 'Event deleted successfully' });
     elementSelector.M_Modal.close();
   };

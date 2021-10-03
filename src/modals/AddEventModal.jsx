@@ -44,7 +44,7 @@ const AddEventModal = ({ addEvent, user: { currentUserId: current } }) => {
     });
 
     setEventTitle('');
-    setEventDecription(null);
+    setEventDecription('');
     setStartDate(null);
     setEndDate(null);
     setIsImportant(null);
