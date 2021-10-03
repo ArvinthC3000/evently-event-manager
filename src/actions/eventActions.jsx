@@ -41,7 +41,9 @@ export const getEvents = current => async dispatch => {
         break;
     }
     // return;
-    const res = await axios.get(`/events?${parameters}`);
+    const res = await axios.get(
+      `http://localhost:5000/api/events?${parameters}`
+    );
     dispatch({
       type: GET_EVENTS,
       payload: res.data,
@@ -68,11 +70,18 @@ export const addEvent = data => async dispatch => {
 
   try {
     const postData = { ...data, id: v4() };
-    const res = await axios.post('/events', postData, config);
+    const res = await axios.post(
+      'http://localhost:5000/api/events',
+      postData,
+      config
+    );
+
+    console.log(postData);
+    console.log(res);
 
     dispatch({
       type: ADD_EVENT,
-      payload: res.data,
+      payload: res.data.event,
     });
   } catch (err) {
     console.log(err);
@@ -88,7 +97,11 @@ export const editEvent = data => async dispatch => {
   };
 
   try {
-    const res = await axios.put(`/events/${data.id}`, data, config);
+    const res = await axios.put(
+      `http://localhost:5000/api/events/${data.id}`,
+      data,
+      config
+    );
 
     dispatch({
       type: UPDATE_EVENT,
@@ -102,7 +115,7 @@ export const editEvent = data => async dispatch => {
 // Delete Event
 export const deleteEvent = id => async dispatch => {
   try {
-    await axios.delete(`/events/${id}`);
+    await axios.delete(`http://localhost:5000/api/events/${id}`);
   } catch (err) {
     console.log(err);
   }

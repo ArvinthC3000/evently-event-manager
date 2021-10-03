@@ -9,9 +9,13 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.4",
+    "config": "^3.3.6",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "materialize-css": "^1.0.0",
     "moment": "^2.29.1",
+    "mongoose": "^6.0.8",
+    "nodemon": "^2.0.13",
     "path": "^0.12.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -27,7 +31,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "react-scripts start",
+    "server": "nodemon server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -61,5 +66,15 @@
     "html-webpack-plugin": "^5.3.2",
     "json-server": "^0.16.3"
   },
-  "proxy": "https://evenly-event-manager.herokuapp.com/api"
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArvinthC3000/evently-event-manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArvinthC3000/evently-event-manager/issues"
+  }
 }
