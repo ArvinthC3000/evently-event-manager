@@ -2,7 +2,6 @@
   "name": "evently",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://arvinthC3000.github.io/evently-event-manager",
   "dependencies": {
     "@syncfusion/ej2-react-calendars": "^19.3.43",
     "@testing-library/jest-dom": "^5.11.4",
@@ -39,7 +38,8 @@
     "json-server": "json-server --watch db.json --port 5000",
     "dev": "concurrently \"npm start\" \"npm run json-server\"",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
   },
   "eslintConfig": {
     "extends": [
